@@ -37,7 +37,7 @@ var renderStatistics = function (ctx, names, times) {
     }
     ctx.fillRect(initialX + indent * x, initialY + (histogramHeight - times[x] * step), barWidth, times[x] * step);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(time), initialX + indent * x, initialY + (histogramHeight - (times[x] * step + 15)));
+    ctx.fillText(Math.round(times[x]), initialX + indent * x, initialY + (histogramHeight - (times[x] * step + 15)));
     ctx.fillText(names[x], initialX + indent * x, 265);
   }
 };
