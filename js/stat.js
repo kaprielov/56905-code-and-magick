@@ -10,13 +10,8 @@ var renderStatistics = function (ctx, names, times) {
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!', 110, 45);
   ctx.fillText('Список результатов:', 110, 60);
-  // Цикл имён
-  for (i = 0; i < names.length; i++) {
-    console.log(names[i]);
-  }
-  // Цикл времён
+  // Находим максемальное время
   var max = -1;
-
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
@@ -24,17 +19,25 @@ var renderStatistics = function (ctx, names, times) {
     }
   }
   // Гистограммы
-  var histogramWidth = 150; // максимальная высота колонки
-  var step = histogramWidth / max; // высота колонки
+  var histogramHeight = 150; // максимальная высота колонки
+  var step = histogramHeight / max; // высота колонки
   var initialX = 110; // координаты по Х
   var initialY = 100; // координаты по Y
   var indent = 90; // оступ
   var barWidth = 40; // ширина колонки
+  var barColor = function getRandom() {
+    return 'rgba(0, 0, 255, ' + Math.random() + ')';
+  };
+  for (var x = 0; x < times.length; x++) {
 
-  for(var i = 0; i < times.length; i++) {
+    if (names[x] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = barColor();
+    }
+    ctx.fillRect(initialX + indent * x, initialY + (histogramHeight - times[x] * step), barWidth, times[x] * step);
     ctx.fillStyle = '#000';
-    ctx.fillRect(initialX + indent * i, initialY + (150 - times[i] * step), barWidth, times[i] * step);
-
-    ctx.fillText(names[i], initialX + indent * i, 265);
+    ctx.fillText(Math.round(time), initialX + indent * x, initialY + (histogramHeight - (times[x] * step + 15)));
+    ctx.fillText(names[x], initialX + indent * x, 265);
   }
 };
