@@ -31,14 +31,15 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40; // ширина колонки
 
   for (var j = 0; j < times.length; j++) {
+    var proportion = times[j] * step;
     if (names[j] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'rgba(0, 0, 255, ' + Math.random() + ')';
     }
-    ctx.fillRect(initialX + indent * j, initialY + (histogramHeight - times[j] * step), barWidth, times[j] * step);
+    ctx.fillRect(initialX + indent * j, initialY + (histogramHeight - proportion), barWidth, proportion);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[j]), initialX + indent * j, initialY + (histogramHeight - (times[j] * step + 15)));
+    ctx.fillText(Math.round(times[j]), initialX + indent * j, initialY + (histogramHeight - (proportion + 15)));
     ctx.fillText(names[j], initialX + indent * j, 265);
   }
 };
