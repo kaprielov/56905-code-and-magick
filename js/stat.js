@@ -1,19 +1,18 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-  // Тень от прямоугольника
+
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(100, 10, 420, 270);
-  // Прямоугольник
+
   ctx.fillStyle = '#fff';
   ctx.fillRect(90, 0, 420, 270);
-  // Тайтл
+
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!', 110, 45);
   ctx.fillText('Список результатов:', 110, 60);
 
-  // Находим максемальное время
   var max = -1;
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
@@ -22,13 +21,12 @@ window.renderStatistics = function (ctx, names, times) {
     }
   }
 
-  // Гистограммы
-  var histogramHeight = 150; // максимальная высота колонки
-  var step = histogramHeight / max; // высота колонки
-  var initialX = 110; // координаты по Х
-  var initialY = 100; // координаты по Y
-  var indent = 90; // оступ
-  var barWidth = 40; // ширина колонки
+  var histogramHeight = 150;
+  var step = histogramHeight / max;
+  var initialX = 110;
+  var initialY = 100;
+  var indent = 90;
+  var barWidth = 40;
 
   for (var j = 0; j < times.length; j++) {
     var proportion = times[j] * step;
